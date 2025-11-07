@@ -1,0 +1,15 @@
+services:
+  novel-crawler:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: novel-crawler
+    environment:
+      NOVELS: ""
+    volumes:
+      # Persist outputs and cached cover/assets to your host
+      - ./books:/app/books
+      - ./assets:/app/assets
+    restart: "unless-stopped"
+    # If your script is not main.js, override the command:
+    # command: ["node","scraper.js"]
