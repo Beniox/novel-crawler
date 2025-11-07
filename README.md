@@ -37,14 +37,14 @@ npm install
 Run with a single novel:
 
 ```bash
-NOVELS="https://webnoveltranslations.com/novel/the-golden-haired-summoner/" node main.js
+NOVELS="URL" node main.js
 ```
 
 Or place multiple URLs into `novels.txt`:
 
 ```
-https://webnoveltranslations.com/novel/the-golden-haired-summoner/
-https://webnoveltranslations.com/novel/the-golden-haired-elementalist/
+URL1
+URL2
 ```
 
 Then run:
