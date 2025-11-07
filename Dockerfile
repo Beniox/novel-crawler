@@ -15,8 +15,6 @@ RUN addgroup -S app && adduser -S app -G app \
   && chown -R app:app /app
 USER app
 
-# Useful defaults (override in compose if needed)
 ENV NODE_ENV=production
 
-# If your entry script has a different name, change main.js accordingly
 ENTRYPOINT ["node","main.js"]

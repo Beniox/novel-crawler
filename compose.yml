@@ -11,5 +11,4 @@ services:
       - ./books:/app/books
       - ./assets:/app/assets
     restart: "unless-stopped"
-    # If your script is not main.js, override the command:
-    # command: ["node","scraper.js"]
+
