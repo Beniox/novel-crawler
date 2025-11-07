@@ -10,5 +10,6 @@ services:
       # Persist outputs and cached cover/assets to your host
       - ./books:/app/books
       - ./assets:/app/assets
+#      - ./novels.txt:/app/novels.txt
     restart: "unless-stopped"
 
