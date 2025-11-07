@@ -91,7 +91,7 @@ You can pass novel URLs directly:
 
 ```yaml
 environment:
-  NOVELS: "https://webnoveltranslations.com/novel/the-golden-haired-summoner/"
+  NOVELS: "URL1,URL2"
 ```
 
 Or use a text file:
