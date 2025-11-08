@@ -1,6 +1,3 @@
-// file: main.js
-// npm i axios cheerio nodepub
-
 const fs = require('fs');
 const fsp = require('fs/promises');
 const path = require('path');
@@ -8,6 +5,7 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const nodepub = require('nodepub');
 const { URL } = require('url');
+const cron = require('node-cron');
 
 /* ───────────────────────── CONFIG ───────────────────────── */
 const OUT_DIR = path.resolve('books');      // where epubs go
@@ -334,9 +332,28 @@ async function main() {
     }
 }
 
+// Run the job once, then schedule it
+async function runJobOnce() {
+    console.log(`[${new Date().toISOString()}] Starting crawl run`);
+    try {
+        await main();
+        console.log(`[${new Date().toISOString()}] Crawl run completed`);
+    } catch (err) {
+        console.error(`[${new Date().toISOString()}] Crawl run failed:`, err);
+    }
+}
+
 if (require.main === module) {
-    main().catch(err => {
-        console.error(err);
-        process.exit(1);
+    // 1) Run immediately on startup
+    runJobOnce();
+
+    // 2) Schedule to run every 6 hours
+    //
+    // "0 */6 * * *" = minute 0, every 6th hour, every day
+    // (in the container's timezone, or TZ env if set)
+    cron.schedule('0 */6 * * *', () => {
+        runJobOnce();
     });
+
+    // Keep process alive
 }
